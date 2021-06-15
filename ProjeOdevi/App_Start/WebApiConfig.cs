@@ -10,11 +10,11 @@ namespace ProjeOdevi
     {
         public static void Register(HttpConfiguration config)
         {
-           
+        
             config.EnableCors();
             
             GlobalConfiguration.Configuration.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
-           
+          
             config.MapHttpAttributeRoutes();
             config.MessageHandlers.Add(new APIKeyHandler());
             config.Routes.MapHttpRoute(
