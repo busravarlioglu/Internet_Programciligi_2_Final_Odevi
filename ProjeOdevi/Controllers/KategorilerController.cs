@@ -14,9 +14,6 @@ namespace ProjeOdevi.Controllers
     {
         eticaretEntities db = new eticaretEntities();
 
-        //tüm kategorileri listlemek için bir KategoriModel listesi oluşturup bunu veri 
-        //tabanından gelen bilgilerle eşleştirip geri döndürüyoruz(return)
-
         public List<KategoriModel> GetKategorisAll()
         {
             List<KategoriModel> kategoris = db.kategorilers.Select(x => new KategoriModel()
@@ -28,7 +25,7 @@ namespace ProjeOdevi.Controllers
             return kategoris;
         }
 
-        //get methıdu ile aldımız id sahesinde o id ye ayit kategoriyi geri döndürüyoruz.
+       
         public  KategoriModel GetKategoriById(int id)
         {
             kategoriler kategori = db.kategorilers.Find(id);
@@ -42,7 +39,6 @@ namespace ProjeOdevi.Controllers
             return kategoriModel;
         }
 
-        //kategori update işlemi: get methodu sahesinde parametrelerden gelen bilgileri veritabanındaki biliglerle değiştiriliyor.
         [Authorize]
         public IHttpActionResult GetUpdateKategori(int id, string kategoriName, string imgUrl)
         {
@@ -55,9 +51,7 @@ namespace ProjeOdevi.Controllers
 
             return Ok();
         }
-        /*kategori silmek için get methodundan gelen id den yararlanarak kategori nesnesine databesden gelen 
-            kategoriyi yakalayıp kategori silme fonksiyonuna yazıyoruz
-        */
+       
         [Authorize]
         public IHttpActionResult GetKategoriDelete(int id)
         {
@@ -66,7 +60,7 @@ namespace ProjeOdevi.Controllers
             db.SaveChanges();
             return Ok();
         }
-        //kategori eklemek için post dan gelen bilgileri alıp kategoriler class ına yükleyip onuda database e ekleme kodu.
+       
         [Authorize]
         public IHttpActionResult PostKategoriAdd(KategoriModel _model)
         {
