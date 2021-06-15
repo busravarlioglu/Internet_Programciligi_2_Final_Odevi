@@ -10,11 +10,11 @@ namespace ProjeOdevi
     {
         public static void Register(HttpConfiguration config)
         {
-            // Web API yapılandırması ve hizmetleri
+           
             config.EnableCors();
-            //xml formatını kapatıp deffault olarak json olacak
+            
             GlobalConfiguration.Configuration.Formatters.XmlFormatter.SupportedMediaTypes.Clear();
-            // Web API yolları
+           
             config.MapHttpAttributeRoutes();
             config.MessageHandlers.Add(new APIKeyHandler());
             config.Routes.MapHttpRoute(
