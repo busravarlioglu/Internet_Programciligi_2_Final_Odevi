@@ -1,0 +1,70 @@
+<div class="container" *ngIf="loginService.isSignedIn">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group">
+                <label for="ürün" class="text-center d-block">ürün ekle</label>
+                
+                            <mat-form-field class="w-100">
+                                <mat-label>Resim Url</mat-label>
+                                <textarea matInput color="primary" #imgUrl  placeholder="Ürün resim URL'ini giriniz" name="urun" rows="5"></textarea>
+                              </mat-form-field>
+                      
+                        
+                            <mat-form-field class="w-100">
+                                <mat-label>Ürün adı</mat-label>
+                                <input matInput color="primary" #urunad  placeholder="Ürün adını giriniz.." name="urun">
+                              </mat-form-field>
+                    
+                    
+                            <mat-form-field class="w-100">
+                                <mat-label>Ürün açıklama</mat-label>
+                                <textarea matInput color="primary" #urunKisa  placeholder="Ürün açıklamasını giriniz.." name="urun" rows="5"></textarea>
+                              </mat-form-field>
+                  
+                      
+                            <mat-form-field class="w-100">
+                                <mat-label>Ürün fiyat</mat-label>
+                                <input matInput color="primary" class="w-100" #urunFiyat  placeholder="Ürün fiyatını giriniz.." name="urun">
+                              </mat-form-field>
+                            
+                     
+                            <mat-form-field appearance="fill" class="w-100">
+                                <mat-label>Kategori</mat-label>
+                                <mat-select #kategori >
+                                  <mat-option *ngFor="let kategori of kategoriler" [value]="kategori.kategoriId">{{kategori.kategoriName}}</mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                     
+                 
+                        <div class="btn-group w-100">
+                         <button class="w-100" color="primary" mat-raised-button  type="submit" (click)="productAdd(urunad.value,urunKisa.value,urunFiyat.value,kategori.value,imgUrl.value)">ürün ekle</button>
+                        
+                        </div>
+                      
+                
+            </div>
+            
+        </div>
+    </div>
+</div>
+<h4 class="mt-3 text-dark text-center">Ürünler</h4>
+<hr class="w-75">
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-4 p-2" *ngFor="let urun of products">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title text-center">{{urun.urunName}}</h5>
+                    <img [src]=urun.imgUrl alt={{urun.urunName}} class="img-fluid" style="height: 300px;">
+                    <p style="font-size: 11pt; margin-top: 10px;">{{urun.urunAciklama}}</p>
+                    <p class="text-center text-primary" style="font-size: 18pt; font-weight: bold;">{{urun.urunFiyat}}TL</p>
+                    <a (click)="onSelect(urun.urunId)" mat-raised-button color="primary" class="btn w-100">Detaylı bak</a> 
+                     <span *ngIf="!loginService.isSignedIn else sil"></span>
+                    <ng-template #sil>
+                        <button (click)="onDelete(urun.urunId)" mat-raised-button color="warn" class="btn w-100 mt-2" >Ürün sil</button>  
+                    </ng-template>       
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

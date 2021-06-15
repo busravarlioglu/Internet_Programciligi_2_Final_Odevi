@@ -1,0 +1,101 @@
+<span *ngIf="!this.loginService.isSignedIn; else login">
+sayfa bulunamadı(404)
+</span>
+<ng-template #login>
+    <div class="container-fulid">
+        <div class="container">
+            <h2 class="text-center">favori ekle</h2>
+            <div class="col-md-12">
+                <table class="table">
+                    
+                     <tr  *ngFor="let urun of urunler">
+                  
+                            <td *ngIf="urun.favori == 0">
+                                <img [src]="urun.imgUrl" width="65px" height="65px">
+                            </td>
+                            <td *ngIf="urun.favori == 0">
+                                {{ urun.urunName }}
+                            </td >
+                            <td *ngIf="urun.favori == 0">
+                               {{ getKategoriName(urun.urunId) }}
+                            </td>
+                            <td *ngIf="urun.favori == 0">
+                                <button mat-button color="primary" class="w-100" (click)="favAdd(urun.urunId)">Favori ekle</button>
+                            </td>     
+                              
+                    </tr> 
+                
+                </table>
+            </div> 
+            <div class="col-md-12 mb-4">
+                <h3 class="text-center">Yetki ver</h3>
+                <hr>
+                  <mat-form-field class="w-100">
+                    <mat-label>Kullanıcı adı</mat-label>
+                    <input matInput color="primary" #userName  placeholder="Kullanıcı adınızı giriniz..">
+                  </mat-form-field>
+                <mat-form-field class="w-100">
+                    <mat-label>E-Posta</mat-label>
+                    <input matInput color="primary" #emailSingup  placeholder="E-Postanızı giriniz..">
+                  </mat-form-field>
+                <mat-form-field class="w-100">
+                    <mat-label>Şifreniz</mat-label>
+                    <input matInput color="primary" #passwordSingup  placeholder="Şifrenizi giriniz..">
+                  </mat-form-field>
+                <button mat-raised-button color="primary" class="w-100" (click)="onSingup(userName.value, emailSingup.value, passwordSingup.value)">yetki ver</button>
+               
+        </div>
+            <h2 class="text-center">Sipariş edilenler</h2>
+            <hr>
+            <div class="row">
+                        <div class="col-md-4 card" *ngFor="let siparis of siparisler">
+                            <div>
+                                <div class="" style="border:none">
+                                    <h2 class="text-center">{{siparis.urunName}}</h2>
+                                    <hr>
+                                    <img [src]="siparis.urunImgUrl" class="img-fluid">
+                                </div>
+                            </div>
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                        Sipariş eden kişi
+                                    </td>
+                                    <td>
+                                        {{siparis.userName}}
+                                    </td>                               
+                                </tr>
+                                <tr>
+                                    <td>
+                                        cep telefonu
+                                    </td>
+                                    <td>
+                                        {{siparis.telNo}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        gönderilecek yer
+                                    </td>
+                                    <td>
+                                        {{siparis.adres}}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        İletişim bilgileri
+                                    </td>
+                                    <td>
+                                        {{siparis.telNo}} <br>
+                                        {{siparis.eMail}}
+                                    </td>
+                                </tr>
+    
+                            </table>
+                         <button mat-raised-button class="btn btn-danger" (click)="siparisDelete(siparis.siparisId)">Siparişi sil</button>
+                        </div>
+                </div>
+            </div>
+        </div>
+    
+</ng-template>

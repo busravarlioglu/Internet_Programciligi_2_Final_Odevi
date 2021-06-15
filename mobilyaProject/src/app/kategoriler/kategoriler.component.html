@@ -1,0 +1,19 @@
+<div class="container">
+    <h4 class="text-center">Kategoriler</h4>
+    <hr class="w-100">
+    <div class="row">
+        <div class="mt-2 col-md-4" *ngFor="let kategori of kategoriler">
+            <div class="card  p-3">
+                <img class="img-fluid" [src]="kategori.imgUrl" style="height: 300px;">
+                <div class="card-body">
+                    <h5 class="card-title text-center">{{kategori.kategoriName}}</h5>
+                    <a (click)="onSelect(kategori.kategoriId)" mat-raised-button color="primary" class="btn w-100">{{kategori.kategoriName}}</a>
+                    <span *ngIf="!this.FirebaseService.isSignedIn else sil"></span>
+                    <ng-template #sil>
+                        <button (click)="onDelete(kategori.kategoriId)" mat-raised-button color="warn" class="btn w-100 mt-2" >Kategori sil</button>  
+                    </ng-template>    
+                </div>
+                </div>
+            </div>
+    </div>
+</div>

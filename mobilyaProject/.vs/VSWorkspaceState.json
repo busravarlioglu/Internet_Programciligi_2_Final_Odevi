@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\navigation",
+    "\\src\\app\\services",
+    "\\src\\app\\services\\firebase",
+    "\\src\\app\\services\\firebase\\storage",
+    "\\src\\app\\urunler"
+  ],
+  "SelectedNode": "\\src\\app\\navigation\\navigation.component.ts",
+  "PreviewInSolutionExplorer": false
+}

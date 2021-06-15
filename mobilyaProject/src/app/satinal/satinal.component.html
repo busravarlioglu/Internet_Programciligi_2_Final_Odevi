@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 card mt-4">
+            <h2 class="text-center mt-2">İletişim bilgileri</h2>
+            <mat-form-field class="w-100">
+                <mat-label>Ad</mat-label>
+                <input matInput color="primary" #ad  placeholder="Adınızı giriniz..">
+              </mat-form-field>
+              <mat-form-field class="w-100">
+                <mat-label>Soyad</mat-label>
+                <input matInput color="primary" #soyad  placeholder="soyadınızı giriniz..">
+              </mat-form-field>
+            <h2 class="text-center">Teslimat bilgileri</h2>
+            <mat-form-field class="w-100">
+                <mat-label>E-Posta</mat-label>
+                <input matInput color="primary" #email  placeholder="E-Postanızı giriniz..">
+              </mat-form-field>
+              <mat-form-field class="w-100">
+                <mat-label>Tel</mat-label>
+                <input matInput color="primary" #cepTel  placeholder="Telefon numaranızı giriniz..">
+              </mat-form-field>
+              <mat-form-field class="w-100">
+                <mat-label>Adres</mat-label>
+                <textarea matInput color="primary" #adres placeholder="Adresinizi giriniz.." name="urun"
+                    rows="5"></textarea>
+            </mat-form-field>
+                   
+             <button class="btn btn-primary w-100"(click)="onSubmit(email.value,cepTel.value,ad.value,soyad.value,adres.value,urunId)">Sipariş et</button>
+                     
+        </div>
+    </div>
+</div>

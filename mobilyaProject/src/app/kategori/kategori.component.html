@@ -1,0 +1,18 @@
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-4 mt-2" *ngFor="let urun of urunler">
+            
+                <div class="card" >
+                    <div class="card-body">
+                        <h5 class="card-title text-center">{{urun.urunName}}</h5>
+                        <img [src]="urun.imgUrl" class="img-fluid" style="height: 300px;">
+                        <p style="font-size: 11pt; margin-top: 10px;">{{urun.urunAciklama}}</p>
+                        <p class="text-center text-primary" style="font-size: 18pt; font-weight: bold;">{{urun.urunFiyat}}TL
+                        </p>
+                        <a (click)="onSelect(urun.urunId)" mat-raised-button color="primary" class="btn w-100">Detaylı bak</a>
+                    </div>
+                </div>     
+            
+        </div>
+    </div>
+</div>

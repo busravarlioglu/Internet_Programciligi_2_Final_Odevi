@@ -1,0 +1,92 @@
+<span *ngIf="!loginService.isSignedIn else trueLogin">
+
+</span>
+<ng-template #trueLogin>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="ürün" class="text-center d-block">kategori ekle</label>
+                    <mat-form-field class="w-100">
+                        <mat-label>Resim Url</mat-label>
+                        <textarea matInput color="primary" #imgUrl placeholder="Ürün resim URL'ini giriniz" name="urun"
+                            rows="5"></textarea>
+                    </mat-form-field>
+
+
+                    <mat-form-field class="w-100">
+                        <mat-label>Kategori adı</mat-label>
+                        <input matInput color="primary" #kategori placeholder="Kategori adını giriniz.." name="urun">
+                    </mat-form-field>
+                    <button class="w-100" mat-raised-button color="primary" type="submit"
+                        (click)="onSubmit(kategori.value, imgUrl.value)">Kategori ekle</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</ng-template>
+<div class="container-fluid" style="margin: 0; padding: 0;">
+
+    <div id="carouselExampleIndicators" class="carousel slide  pt-3 pb-3" style="background-color: #8d9db6;"
+        data-ride="carousel">
+
+        <div class="carousel-inner ">
+            <div class="carousel-item active offset-md-5">
+                <div class="card col-md-2 pt-3">
+                    <img class="img-fluid" src="../../assets/images/kategoriler.png">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Kategoriler</h5>
+                        <a routerLink="/kategoriler" mat-raised-button color="primary" class="btn w-100">Kategoriler</a>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item  offset-md-5" *ngFor="let kategori of kategoriler">
+                <div class="card col-md-2 pt-3">
+                    <img class="img-fluid" [src]="kategori.imgUrl">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">{{kategori.kategoriName}}</h5>
+                        <a (click)="onSelect(kategori.kategoriName)"
+                            class="w-100" mat-raised-button color="primary">{{kategori.kategoriName}}</a>
+                        <span *ngIf="!loginService.isSignedIn else sil"></span>
+                        <ng-template #sil>
+                            <button (click)="onDelete(kategori.kategoriId)" mat-raised-button color="warn" class="w-100 mt-2">Kategori
+                                sil</button>
+                        </ng-template>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon text-dark" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+</div>
+<h2 class="mt-3 text-dark text-center">size önerdiklerimiz</h2>
+<hr class="w-75">
+<div class="container">
+    <div class="row">
+        <mat-card class="col-md-4 p-2" *ngFor="let urun of urunler">
+            <div class="card" *ngIf="urun.favori == 1">
+                <div class="card-body">
+                    <h5 class="card-title text-center">{{urun.urunName}}</h5>
+                    <img [src]=urun.imgUrl alt="" class="img-fluid" style="height: 300px;">
+                    <p style="font-size: 11pt; margin-top: 10px;">{{urun.urunAciklama}}</p>
+                    <p class="text-center text-primary" style="font-size: 18pt; font-weight: bold;">{{urun.urunFiyat}}TL
+                    </p>
+                    <a (click)="onSelectUrun(urun.urunId)" mat-raised-button color="primary" class="w-100">Detaylı bak</a>
+                    <span *ngIf="!loginService.isSignedIn else sil"></span>
+                    <ng-template #sil>
+                        <button (click)="favRemove(urun.urunId)" mat-raised-button color="warn" class="w-100 mt-2">favori
+                            kaldır</button>
+                    </ng-template>
+                </div>
+            </div>
+        </mat-card>
+    </div>
+</div>

@@ -1,0 +1,43 @@
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
+    <a class="navbar-brand" routerLink="/">
+        <img  src="../../assets/images/LOGO.png" height="55px">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="/">Anasayfa <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="/urunler">Ürünler <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" routerLink="/kategoriler" id="navbarDropdown" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Kategoriler
+                </a>
+            </li>
+            <li class="nav-item active" *ngIf="this.loginService.isSignedIn">
+                <a class="nav-link" routerLink="/admin">Admin<span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+        
+        <ul class="navbar-nav ml-auto">
+           
+            <li class="nav-item" *ngIf="!loginService.isSignedIn; else logout">
+                <a class="nav-link text-dark" routerLink="/login">Giriş yap | Kaydol</a>
+            </li>
+            <ng-template #logout>
+                <li>
+                    <button (click)="loginOut()" mat-raised-button color="warn">çıkış yap</button>
+                </li>
+            </ng-template>
+
+        </ul>
+   
+    </div>
+</nav>
