@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4328483a857743fbbcddaec66ad8f202" Name="Diagram1">
+        <EntityTypeShape EntityType="eticaretModel.favoriler" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="eticaretModel.image" Width="1.5" PointX="7.125" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="eticaretModel.kategoriler" Width="1.5" PointX="1" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="eticaretModel.siparisler" Width="1.5" PointX="5.375" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="eticaretModel.sysdiagram" Width="1.5" PointX="7.375" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="eticaretModel.urunler" Width="1.5" PointX="3.125" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="eticaretModel.user" Width="1.5" PointX="1.125" PointY="0.5" IsExpanded="true" />
+        <AssociationConnector Association="eticaretModel.FK_favoriler_urunler" ManuallyRouted="false" />
+        <AssociationConnector Association="eticaretModel.FK_urunler_kategoriler" ManuallyRouted="false" />
+        <AssociationConnector Association="eticaretModel.FK_siparisler_urunler" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

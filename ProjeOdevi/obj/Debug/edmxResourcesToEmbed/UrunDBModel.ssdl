@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="eticaretModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="favorilers">
+    <Key>
+      <PropertyRef Name="favoriId" />
+    </Key>
+    <Property Name="favoriId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="urunId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="images">
+    <Key>
+      <PropertyRef Name="imgId" />
+    </Key>
+    <Property Name="imgId" Type="int" Nullable="false" />
+    <Property Name="imgUrl" Type="varchar" MaxLength="500" Nullable="false" />
+  </EntityType>
+  <EntityType Name="kategorilers">
+    <Key>
+      <PropertyRef Name="kategoriId" />
+    </Key>
+    <Property Name="kategoriId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="kategoriName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="imgUrl" Type="varchar" MaxLength="500" Nullable="false" />
+  </EntityType>
+  <EntityType Name="siparislers">
+    <Key>
+      <PropertyRef Name="siparisId" />
+    </Key>
+    <Property Name="siparisId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="urunId" Type="int" Nullable="false" />
+    <Property Name="durum" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="adres" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="soyad" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="ad" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="telNo" Type="varchar" MaxLength="11" Nullable="false" />
+    <Property Name="eMail" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="urunlers">
+    <Key>
+      <PropertyRef Name="urunId" />
+    </Key>
+    <Property Name="urunId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="urunName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="urunAciklama" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="urunFiyat" Type="float" Nullable="false" />
+    <Property Name="imgUrl" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="kategoriId" Type="int" Nullable="false" />
+    <Property Name="favori" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="userId" />
+    </Key>
+    <Property Name="userId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="userName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="userPassword" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="userEmail" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="yetki" Type="int" Nullable="false" />
+    <Property Name="apikey" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <Association Name="FK_favoriler_urunler">
+    <End Role="urunlers" Type="Self.urunlers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="favorilers" Type="Self.favorilers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="urunlers">
+        <PropertyRef Name="urunId" />
+      </Principal>
+      <Dependent Role="favorilers">
+        <PropertyRef Name="urunId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_siparisler_urunler">
+    <End Role="urunlers" Type="Self.urunlers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="siparislers" Type="Self.siparislers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="urunlers">
+        <PropertyRef Name="urunId" />
+      </Principal>
+      <Dependent Role="siparislers">
+        <PropertyRef Name="urunId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_urunler_kategoriler">
+    <End Role="kategorilers" Type="Self.kategorilers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="urunlers" Type="Self.urunlers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="kategorilers">
+        <PropertyRef Name="kategoriId" />
+      </Principal>
+      <Dependent Role="urunlers">
+        <PropertyRef Name="kategoriId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="eticaretModelStoreContainer">
+    <EntitySet Name="favorilers" EntityType="Self.favorilers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="images" EntityType="Self.images" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="kategorilers" EntityType="Self.kategorilers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="siparislers" EntityType="Self.siparislers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="urunlers" EntityType="Self.urunlers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_favoriler_urunler" Association="Self.FK_favoriler_urunler">
+      <End Role="urunlers" EntitySet="urunlers" />
+      <End Role="favorilers" EntitySet="favorilers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_siparisler_urunler" Association="Self.FK_siparisler_urunler">
+      <End Role="urunlers" EntitySet="urunlers" />
+      <End Role="siparislers" EntitySet="siparislers" />
+    </AssociationSet>
+    <AssociationSet Name="FK_urunler_kategoriler" Association="Self.FK_urunler_kategoriler">
+      <End Role="kategorilers" EntitySet="kategorilers" />
+      <End Role="urunlers" EntitySet="urunlers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
